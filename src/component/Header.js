@@ -20,8 +20,6 @@ const Header = () => {
   }
 
   useEffect(() => {
-    
-    console.log("cache",cachedData)
     const timer = setTimeout(()=> {
       if(cachedData[searchText]) {
         setsearchSuggestion(cachedData[searchText]);
@@ -36,8 +34,6 @@ const Header = () => {
   const getSuggestionData = async() => {
     const data = await fetch('http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q='+ searchText);
     const json = await data.json();
-
-    console.log(json[1])
     setsearchSuggestion(json[1]);
     json[1].length !==0 &&dispatch(cacheSuggestion({[searchText] : json[1]}))
   }
